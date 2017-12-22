@@ -7,7 +7,7 @@ import OfflinePlugin from 'offline-plugin';
 import path from 'path';
 
 const ENV = process.env.NODE_ENV || 'development';
-const CSS_MAPS = ENV!=='production';
+const CSS_MAPS = ENV !== 'production';
 
 const SRC = path.resolve(__dirname, "src");
 const PAGES = path.resolve(__dirname, "src/pages");
@@ -21,7 +21,7 @@ module.exports = {
 
 	output: {
 		path: path.resolve(__dirname, "build"),
-		publicPath: '/',
+		publicPath: '/find-the-bastards/',
 		filename: 'bundle.js'
 	},
 
@@ -73,7 +73,7 @@ module.exports = {
 							options: {
 								sourceMap: CSS_MAPS,
 								plugins: () => {
-									autoprefixer({ browsers: [ 'last 2 versions' ] });
+									autoprefixer({ browsers: ['last 2 versions'] });
 								}
 							}
 						},
@@ -101,7 +101,7 @@ module.exports = {
 							options: {
 								sourceMap: CSS_MAPS,
 								plugins: () => {
-									autoprefixer({ browsers: [ 'last 2 versions' ] });
+									autoprefixer({ browsers: ['last 2 versions'] });
 								}
 							}
 						},
@@ -122,7 +122,7 @@ module.exports = {
 			},
 			{
 				test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
-				use: ENV==='production' ? 'file-loader' : 'url-loader'
+				use: ENV === 'production' ? 'file-loader' : 'url-loader'
 			}
 		]
 	},
@@ -144,7 +144,7 @@ module.exports = {
 			{ from: './manifest.json', to: './' },
 			{ from: './favicon.ico', to: './' }
 		])
-	]).concat(ENV==='production' ? [
+	]).concat(ENV === 'production' ? [
 		new webpack.optimize.UglifyJsPlugin({
 			output: {
 				comments: false
@@ -189,7 +189,7 @@ module.exports = {
 					requestTypes: ['navigate']
 				}
 			],
-			publicPath: '/'
+			publicPath: '/find-the-bastards/'
 		})
 	] : []),
 
@@ -204,22 +204,24 @@ module.exports = {
 		setImmediate: false
 	},
 
-	devtool: ENV==='production' ? 'source-map' : 'cheap-module-eval-source-map',
+	devtool: ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
 
 	devServer: {
 		port: process.env.PORT || 8087,
 		host: 'localhost',
-		publicPath: '/',
+		publicPath: '/find-the-bastards/',
 		contentBase: './src',
 		historyApiFallback: true,
 		open: true,
-		openPage: '',
+		openPage: 'find-the-bastards/',
 		proxy: {
-			// OPTIONAL: proxy configuration:
-			// '/optional-prefix/**': { // path pattern to rewrite
-			//   target: 'http://target-host.com',
-			//   pathRewrite: path => path.replace(/^\/[^\/]+\//, '')   // strip first path segment
-			// }
+			'/find-the-bastards': {
+				target: "http://localhost:8087",
+				bypass: (req) => {
+					let view = req.url.replace('/find-the-bastards', '');
+					return view;
+				}
+			}
 		}
 	}
 };

@@ -24,7 +24,7 @@ export default class App extends Component {
 				<Header appName={this.state.appName}/>
 				
 				<Router onChange={this.handleRoute}>
-					<Home path="/" appName={this.state.appName}/>
+					<Home path="/find-the-bastards/" appName={this.state.appName}/>
 				</Router>
 
 				<Footer appName={this.state.appName}/>
