@@ -11,7 +11,8 @@
     "test": "npm run -s lint && jest --coverage",
     "test:watch": "npm run -s test -- --watch",
     "lint": "eslint src test",
-    "publish": "node ./gh-publish.js"
+    "publish": "node ./gh-publish.js",
+    "dist": "npm run build && npm run publish"
   },
   "keywords": [
     "preact",

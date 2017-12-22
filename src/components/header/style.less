@@ -10,20 +10,27 @@
 	background: #673AB7;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	z-index: 50;
+	display: flex;
+	justify-content: space-between;
 
-	h1 {
-		float: left;
-		margin: 0;
-		padding: 0 15px;
-		font-size: 24px;
-		line-height: 56px;
-		font-weight: 400;
-		color: #FFF;
+	.brand{
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+		
+		img{
+			background-color: #fff;
+			margin: 0 .25em;
+			border-radius: .25em;
+		}
+
+		span{
+			font-weight: bold;
+			color: #FFF;
+		}
 	}
 
 	nav {
-		float: right;
-		font-size: 100%;
 
 		a {
 			display: inline-block;

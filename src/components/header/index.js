@@ -6,9 +6,14 @@ export default class Header extends Component {
 	render() {
 		return (
 			<header class={style.header}>
-				<h1>{this.props.appName}</h1>
+				<Link href="/" class={style.brand}>
+					<img src="assets/icons/favicon-32x32.png" />
+					<span>{this.props.appName}</span>
+				</Link>
 				<nav>
-					<Link href="/">Home</Link>
+					<a target="_blank" href="https://github.com/mazipan/find-the-bastards">
+						Github
+					</a>
 				</nav>
 			</header>
 		);
